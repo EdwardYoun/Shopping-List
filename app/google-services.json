@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "961232875930",
+    "firebase_url": "https://shopping-list-c649e-default-rtdb.firebaseio.com",
+    "project_id": "shopping-list-c649e",
+    "storage_bucket": "shopping-list-c649e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:961232875930:android:038a02bc298d72ded48a23",
+        "android_client_info": {
+          "package_name": "edu.uga.cs.shoppinglist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "961232875930-cb53qscsomhcqjk1iccp971t3quu04fu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAU_ctSoutfilQOiotSxOZuT18-FyyICNA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "961232875930-cb53qscsomhcqjk1iccp971t3quu04fu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
