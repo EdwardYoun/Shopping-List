@@ -30,14 +30,16 @@ public class MainActivity extends AppCompatActivity {
     private class RegisterButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick( View v ) {
-
+            Intent intent = new Intent(v.getContext(), RegisterActivity.class);
+            v.getContext().startActivity(intent);
         }
     }
 
     private class LoginButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick( View v ) {
-
+            Intent intent = new Intent(v.getContext(), LoginActivity.class);
+            v.getContext().startActivity(intent);
         }
     }
 }
