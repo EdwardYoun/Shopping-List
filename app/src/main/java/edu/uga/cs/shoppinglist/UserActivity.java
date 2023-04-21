@@ -3,8 +3,11 @@ package edu.uga.cs.shoppinglist;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,5 +44,17 @@ public class UserActivity extends AppCompatActivity {
                 }
             }
         });
+
+        Button shoppingListButton = (Button) findViewById(R.id.button9);
+        shoppingListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserActivity.this, ListViewActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
     }
 }
