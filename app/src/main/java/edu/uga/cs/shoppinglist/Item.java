@@ -4,14 +4,12 @@ public class Item {
     private String itemName;
     private String priceCost;
 
-    public Item(String itemId, String itemName, String priceCost) {
-        // Required empty public constructor
-    }
 
     public Item(String itemName, String priceCost) {
         this.itemName = itemName;
         this.priceCost = priceCost;
     }
+
 
     public String getItemName() {
         return itemName;
