@@ -4,6 +4,7 @@ public class Item {
     private String itemName;
     private String priceCost;
 
+    public Item(){}
 
     public Item(String itemName, String priceCost) {
         this.itemName = itemName;

@@ -1,5 +1,6 @@
 package edu.uga.cs.shoppinglist;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.LauncherActivity;
@@ -60,14 +61,35 @@ public class ListViewActivity extends AppCompatActivity {
                 if (!itemName.isEmpty() && !priceCost.isEmpty()) {
                     String itemId = databaseReference.push().getKey();
                     Item item = new Item(itemName, priceCost);
+                    databaseReference.child(itemId).setValue(item);
                     itemList.add(item);
                     itemNameEditText.setText("");
                     priceCostEditText.setText("");
-                    itemAdapter.notifyDataSetChanged();
+
+                    //itemAdapter.notifyDataSetChanged();
+
+
+
                 }
             }
         });
 
+        // Listen for changes in the database and update the list adapter with new data
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                itemList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Item item = snapshot.getValue(Item.class);
+                    itemList.add(item);
+                }
+                itemAdapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle errors here
+            }
+        });
         ImageButton backToUser = (ImageButton) findViewById(R.id.goBackButton1);
         backToUser.setOnClickListener(new View.OnClickListener() {
 
