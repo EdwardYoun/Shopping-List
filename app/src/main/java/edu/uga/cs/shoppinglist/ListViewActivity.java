@@ -34,6 +34,7 @@ public class ListViewActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
 
     private FirebaseDatabase database;
+    private Item currentItem;
 
 
     @Override
