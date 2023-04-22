@@ -65,11 +65,7 @@ public class ListViewActivity extends AppCompatActivity {
                     itemList.add(item);
                     itemNameEditText.setText("");
                     priceCostEditText.setText("");
-
                     //itemAdapter.notifyDataSetChanged();
-
-
-
                 }
             }
         });
@@ -92,7 +88,6 @@ public class ListViewActivity extends AppCompatActivity {
         });
         ImageButton backToUser = (ImageButton) findViewById(R.id.goBackButton1);
         backToUser.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ListViewActivity.this, UserActivity.class);
