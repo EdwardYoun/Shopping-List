@@ -27,7 +27,7 @@ public class ListViewActivity extends AppCompatActivity {
 
 
     private EditText itemNameEditText, priceCostEditText;
-    private Button addButton;
+    private Button addButton, editButton, deleteButton, buyButton;
     private ListView listView;
     private ArrayList<Item> itemList;
     private ItemAdapter itemAdapter;
@@ -45,6 +45,14 @@ public class ListViewActivity extends AppCompatActivity {
         priceCostEditText = findViewById(R.id.priceCost);
         addButton = findViewById(R.id.add_button );
         listView = findViewById(R.id.list_view);
+
+        editButton = findViewById(R.id.button5);
+        deleteButton = findViewById(R.id.button10);
+        buyButton = findViewById(R.id.button11);
+
+        editButton.setVisibility(View.GONE);
+        deleteButton.setVisibility(View.GONE);
+        buyButton.setVisibility(View.GONE);
 
         itemList = new ArrayList<>();
         itemAdapter = new ItemAdapter(this, itemList);
