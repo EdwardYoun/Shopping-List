@@ -55,22 +55,8 @@ public class ItemAdapter extends BaseAdapter {
         itemNameTextView.setText(itemList.get(position).getItemName());
         priceCostTextView.setText(itemList.get(position).getPriceCost());
 
-        if (itemList.get(position).isAddedToList()) {
-            addButton.setVisibility(View.GONE);
-            returnButton.setVisibility(View.VISIBLE);
-        } else {
-            addButton.setVisibility(View.VISIBLE);
-            returnButton.setVisibility(View.GONE);
-        }
-
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // set isAddedToList to true and update the database
-                itemList.get(position).setAddedToList(true);
-                FirebaseDatabase.getInstance().getReference().child("items").child(itemList.get(position).getItemName()).setValue(itemList.get(position));
-            }
-        });
+        addButton.setVisibility(View.GONE);
+        returnButton.setVisibility(View.GONE);
 
         return convertView;
     }
