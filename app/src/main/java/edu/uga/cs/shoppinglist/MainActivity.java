@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                     }
             );
 
-    // This method is called once the Firebase sign-in activity (lqunched above) returns (completes).
+    // This method is called once the Firebase sign-in activity (launched above) returns (completes).
     // Then, the current (logged-in) Firebase user can be obtained.
     // Subsequently, there is a transition to the JobLeadManagementActivity.
     private void onSignInResult( FirebaseAuthUIAuthenticationResult result ) {
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
             //Log.d( DEBUG_TAG, "MainActivity.onSignInResult: Signed in as: " + user.getEmail() );
 
-            // after a successful sign in, start the job leads management activity
+            // after a successful sign in, start the user activity
             Intent intent = new Intent( this, UserActivity.class );
             startActivity( intent );
         }
