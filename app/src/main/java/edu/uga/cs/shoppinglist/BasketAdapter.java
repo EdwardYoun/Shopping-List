@@ -1,28 +1,22 @@
 package edu.uga.cs.shoppinglist;
 
-import android.content.ClipData;
 import android.content.Context;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.ArrayList;
-import edu.uga.cs.shoppinglist.Item;
 
-public class ItemAdapter extends BaseAdapter {
+public class BasketAdapter extends BaseAdapter {
 
     private Context context;
     private ArrayList<Item> itemList;
 
-    public ItemAdapter(Context context, ArrayList<Item> itemList) {
+    public BasketAdapter(Context context, ArrayList<Item> itemList) {
         this.context = context;
         this.itemList = itemList;
     }
@@ -54,7 +48,9 @@ public class ItemAdapter extends BaseAdapter {
         ImageButton returnButton = convertView.findViewById(R.id.goBackButton1);
         TextView basket = convertView.findViewById(R.id.textView5);
         Button checkoutButton = convertView.findViewById(R.id.button12);
-        Button removeButton = convertView.findViewById(R.id.button13);
+        Button editButton = convertView.findViewById(R.id.button5);
+        Button deleteButton = convertView.findViewById(R.id.button10);
+        Button buyButton = convertView.findViewById(R.id.button11);
 
         itemNameTextView.setText(itemList.get(position).getItemName());
         priceCostTextView.setText("$" + itemList.get(position).getPriceCost());
@@ -63,7 +59,9 @@ public class ItemAdapter extends BaseAdapter {
         returnButton.setVisibility(View.GONE);
         basket.setVisibility(View.GONE);
         checkoutButton.setVisibility(View.GONE);
-        removeButton.setVisibility(View.GONE);
+        editButton.setVisibility(View.GONE);
+        deleteButton.setVisibility(View.GONE);
+        buyButton.setVisibility(View.GONE);
 
         return convertView;
     }

@@ -27,10 +27,11 @@ public class ListViewActivity extends AppCompatActivity {
 
 
     private EditText itemNameEditText, priceCostEditText;
-    private Button addButton, editButton, deleteButton, buyButton;
-    private ListView listView;
-    private ArrayList<Item> itemList;
+    private Button addButton, editButton, deleteButton, buyButton, removeButton;
+    private ListView listView, basketView;
+    private ArrayList<Item> itemList, basketList;
     private ItemAdapter itemAdapter;
+    private BasketAdapter basketAdapter;
     private DatabaseReference databaseReference;
 
     private FirebaseDatabase database;
@@ -45,18 +46,25 @@ public class ListViewActivity extends AppCompatActivity {
         priceCostEditText = findViewById(R.id.priceCost);
         addButton = findViewById(R.id.add_button );
         listView = findViewById(R.id.list_view);
+        basketView = findViewById(R.id.basket_view);
 
         editButton = findViewById(R.id.button5);
         deleteButton = findViewById(R.id.button10);
         buyButton = findViewById(R.id.button11);
+        removeButton = findViewById(R.id.button13);
 
         editButton.setVisibility(View.GONE);
         deleteButton.setVisibility(View.GONE);
         buyButton.setVisibility(View.GONE);
+        removeButton.setVisibility(View.GONE);
 
         itemList = new ArrayList<>();
         itemAdapter = new ItemAdapter(this, itemList);
         listView.setAdapter(itemAdapter);
+
+        basketList = new ArrayList<>();
+        basketAdapter = new BasketAdapter(this, basketList);
+        basketView.setAdapter(basketAdapter);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("items");
 
@@ -71,6 +79,7 @@ public class ListViewActivity extends AppCompatActivity {
                     Item item = new Item(itemName, priceCost);
                     databaseReference.child(itemId).setValue(item);
                     itemList.add(item);
+                    basketList.add(item);
                     itemNameEditText.setText("");
                     priceCostEditText.setText("");
                     //itemAdapter.notifyDataSetChanged();
