@@ -59,32 +59,30 @@
                 android:text="Add"
                 android:textSize="12sp" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/button5"
                 android:layout_width="wrap_content"
-                android:layout_height="65dp"
+                android:layout_height="48dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="Edit"
-                android:textSize="12sp" />
+                app:srcCompat="@android:drawable/ic_menu_edit" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/button10"
                 android:layout_width="wrap_content"
-                android:layout_height="65dp"
+                android:layout_height="48dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="Delete"
-                android:textSize="12sp" />
+                app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"/>
 
-            <Button
+            <ImageButton
                 android:id="@+id/button11"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="Buy"
-                android:textSize="12sp" />
+                app:srcCompat="@android:drawable/ic_input_add" />
+
 
             <Button
                 android:id="@+id/button13"

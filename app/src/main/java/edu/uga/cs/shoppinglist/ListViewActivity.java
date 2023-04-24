@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.LauncherActivity;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,7 +28,8 @@ public class ListViewActivity extends AppCompatActivity {
 
 
     private EditText itemNameEditText, priceCostEditText;
-    private Button addButton, editButton, deleteButton, buyButton, removeButton;
+    private Button addButton, removeButton;
+    private ImageButton editButton, deleteButton, buyButton;
     private ListView listView, basketView;
     private ArrayList<Item> itemList, basketList;
     private ItemAdapter itemAdapter;
