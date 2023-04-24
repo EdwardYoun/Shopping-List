@@ -57,7 +57,7 @@ public class ItemAdapter extends BaseAdapter {
         Button removeButton = convertView.findViewById(R.id.button13);
 
         itemNameTextView.setText(itemList.get(position).getItemName());
-        priceCostTextView.setText("$" + itemList.get(position).getPriceCost());
+        priceCostTextView.setText(itemList.get(position).getPriceCost());
 
         addButton.setVisibility(View.GONE);
         returnButton.setVisibility(View.GONE);

@@ -34,12 +34,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
                 android:hint="Item Name"
                 android:imeOptions="actionDone"
                 android:nextFocusDown="@id/priceCost"
                 android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:layout_gravity="center"
+                android:text="$" />
 
             <EditText
                 android:id="@+id/priceCost"
