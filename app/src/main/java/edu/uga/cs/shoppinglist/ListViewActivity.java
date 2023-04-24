@@ -79,7 +79,6 @@ public class ListViewActivity extends AppCompatActivity {
                     Item item = new Item(itemName, priceCost);
                     databaseReference.child(itemId).setValue(item);
                     itemList.add(item);
-                    basketList.add(item);
                     itemNameEditText.setText("");
                     priceCostEditText.setText("");
                     //itemAdapter.notifyDataSetChanged();
