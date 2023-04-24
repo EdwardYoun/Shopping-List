@@ -48,9 +48,9 @@ public class BasketAdapter extends BaseAdapter {
         ImageButton returnButton = convertView.findViewById(R.id.goBackButton1);
         TextView basket = convertView.findViewById(R.id.textView5);
         Button checkoutButton = convertView.findViewById(R.id.button12);
-        Button editButton = convertView.findViewById(R.id.button5);
-        Button deleteButton = convertView.findViewById(R.id.button10);
-        Button buyButton = convertView.findViewById(R.id.button11);
+        ImageButton editButton = convertView.findViewById(R.id.button5);
+        ImageButton deleteButton = convertView.findViewById(R.id.button10);
+        ImageButton buyButton = convertView.findViewById(R.id.button11);
 
         itemNameTextView.setText(itemList.get(position).getItemName());
         priceCostTextView.setText("$" + itemList.get(position).getPriceCost());
