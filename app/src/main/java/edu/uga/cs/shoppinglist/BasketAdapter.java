@@ -9,12 +9,16 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 public class BasketAdapter extends BaseAdapter {
 
     private Context context;
     private ArrayList<Item> itemList;
+    private DatabaseReference databaseReference, basketReference;
 
     public BasketAdapter(Context context, ArrayList<Item> itemList) {
         this.context = context;
@@ -51,6 +55,9 @@ public class BasketAdapter extends BaseAdapter {
         ImageButton editButton = convertView.findViewById(R.id.button5);
         ImageButton deleteButton = convertView.findViewById(R.id.button10);
         ImageButton buyButton = convertView.findViewById(R.id.button11);
+        Button removeButton = convertView.findViewById(R.id.button13);
+        databaseReference = FirebaseDatabase.getInstance().getReference("items");
+        basketReference = FirebaseDatabase.getInstance().getReference("basket");
 
         itemNameTextView.setText(itemList.get(position).getItemName());
         itemNameTextView.setFocusable(false);
@@ -64,6 +71,15 @@ public class BasketAdapter extends BaseAdapter {
         editButton.setVisibility(View.GONE);
         deleteButton.setVisibility(View.GONE);
         buyButton.setVisibility(View.GONE);
+
+        removeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Item item = new Item(itemList.get(position).getId(), itemList.get(position).getItemName(), itemList.get(position).getPriceCost());
+                databaseReference.child(itemList.get(position).getId()).setValue(item);
+                basketReference.child(itemList.get(position).getId()).removeValue();
+            }
+        });
 
         return convertView;
     }
