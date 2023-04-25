@@ -28,7 +28,7 @@ public class ItemAdapter extends BaseAdapter {
 
     private Context context;
     private ArrayList<Item> itemList;
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference, basketReference;
 
     public ItemAdapter(Context context, ArrayList<Item> itemList) {
         this.context = context;
@@ -36,9 +36,7 @@ public class ItemAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
-        return itemList.size();
-    }
+    public int getCount() { return itemList.size(); }
 
     @Override
     public Object getItem(int position) {
@@ -65,7 +63,9 @@ public class ItemAdapter extends BaseAdapter {
         Button removeButton = convertView.findViewById(R.id.button13);
         ImageButton editButton = convertView.findViewById(R.id.button5);
         ImageButton deleteButton = convertView.findViewById(R.id.button10);
+        ImageButton buyButton = convertView.findViewById(R.id.button11);
         databaseReference = FirebaseDatabase.getInstance().getReference("items");
+        basketReference = FirebaseDatabase.getInstance().getReference("basket");
 
         itemNameTextView.setText(itemList.get(position).getItemName());
         priceCostTextView.setText(itemList.get(position).getPriceCost());
@@ -99,6 +99,15 @@ public class ItemAdapter extends BaseAdapter {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                databaseReference.child(itemList.get(position).getId()).removeValue();
+            }
+        });
+
+        buyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Item item = new Item(itemList.get(position).getId(), itemList.get(position).getItemName(), itemList.get(position).getPriceCost());
+                basketReference.child(itemList.get(position).getId()).setValue(item);
                 databaseReference.child(itemList.get(position).getId()).removeValue();
             }
         });

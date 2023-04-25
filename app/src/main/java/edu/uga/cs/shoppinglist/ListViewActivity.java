@@ -34,7 +34,7 @@ public class ListViewActivity extends AppCompatActivity {
     private ArrayList<Item> itemList, basketList;
     private ItemAdapter itemAdapter;
     private BasketAdapter basketAdapter;
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference, basketReference;
 
     private FirebaseDatabase database;
 
@@ -69,6 +69,7 @@ public class ListViewActivity extends AppCompatActivity {
         basketView.setAdapter(basketAdapter);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("items");
+        basketReference = FirebaseDatabase.getInstance().getReference("basket");
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,14 +105,50 @@ public class ListViewActivity extends AppCompatActivity {
             }
         });
 
+        basketReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                basketList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Item item = snapshot.getValue(Item.class);
+                    basketList.add(item);
+                }
+                basketAdapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle errors here
+            }
+        });
+
         ImageButton backToUser = (ImageButton) findViewById(R.id.goBackButton1);
         backToUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (!basketList.isEmpty()) {
+                    for (int i = 0; i < basketList.size(); i++) {
+                        Item item = new Item(basketList.get(i).getId(), basketList.get(i).getItemName(), basketList.get(i).getPriceCost());
+                        databaseReference.child(basketList.get(i).getId()).setValue(item);
+                    }
+                    basketReference.removeValue();
+                }
                 Intent intent = new Intent(ListViewActivity.this, UserActivity.class);
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!basketList.isEmpty()) {
+            for (int i = 0; i < basketList.size(); i++) {
+                Item item = new Item(basketList.get(i).getId(), basketList.get(i).getItemName(), basketList.get(i).getPriceCost());
+                databaseReference.child(basketList.get(i).getId()).setValue(item);
+            }
+            basketReference.removeValue();
+        }
+        Intent intent = new Intent(ListViewActivity.this, UserActivity.class);
+        startActivity(intent);
     }
 
 }
