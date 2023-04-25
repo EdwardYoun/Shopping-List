@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -83,6 +84,13 @@ public class ItemAdapter extends BaseAdapter {
                 if (!newItemName.isEmpty() && !newPriceCost.isEmpty()) {
                     databaseReference.child(itemList.get(position).getId()).child("itemName").setValue(newItemName);
                     databaseReference.child(itemList.get(position).getId()).child("priceCost").setValue(newPriceCost);
+                }
+                else {
+                    itemNameTextView.setText(itemList.get(position).getItemName());
+                    priceCostTextView.setText(itemList.get(position).getPriceCost());
+                    Toast.makeText(v.getContext(),
+                            "Cannot update with blank fields!",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
