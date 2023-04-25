@@ -80,7 +80,6 @@ public class ListViewActivity extends AppCompatActivity {
                     String itemId = databaseReference.push().getKey();
                     Item item = new Item(itemId, itemName, priceCost);
                     databaseReference.child(itemId).setValue(item);
-                    itemList.add(item);
                     itemNameEditText.setText("");
                     priceCostEditText.setText("");
                     //itemAdapter.notifyDataSetChanged();
