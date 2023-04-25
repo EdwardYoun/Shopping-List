@@ -34,7 +34,7 @@ public class ListViewActivity extends AppCompatActivity {
     private ArrayList<Item> itemList, basketList;
     private ItemAdapter itemAdapter;
     private BasketAdapter basketAdapter;
-    private DatabaseReference databaseReference, basketReference;
+    private DatabaseReference databaseReference, basketReference, purchasedReference;
 
     private FirebaseDatabase database;
 
@@ -70,6 +70,7 @@ public class ListViewActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("items");
         basketReference = FirebaseDatabase.getInstance().getReference("basket");
+        purchasedReference = FirebaseDatabase.getInstance().getReference("purchased");
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,7 +137,27 @@ public class ListViewActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        Button checkoutButton = findViewById(R.id.button12);
+        checkoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                ArrayList<Item> purchasedList = new ArrayList<>();
+
+                if(!basketList.isEmpty()) {
+                    for (int i = 0; i < basketList.size(); i++) {
+                        Item item = new Item(basketList.get(i).getId(), basketList.get(i).getItemName(), basketList.get(i).getPriceCost());
+                        purchasedReference.child(basketList.get(i).getId()).setValue(item);
+                    }
+                    basketReference.removeValue();
+                }
+                Intent intent = new Intent(ListViewActivity.this, PurchasedActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
+
+
 
     @Override
     public void onBackPressed() {

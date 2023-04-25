@@ -15,6 +15,9 @@
         android:theme="@style/Theme.ShoppingList"
         tools:targetApi="31">
         <activity
+            android:name=".PurchasedActivity"
+            android:exported="false" />
+        <activity
             android:name=".Basket"
             android:exported="false" />
         <activity
