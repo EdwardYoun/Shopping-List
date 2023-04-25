@@ -53,7 +53,9 @@ public class BasketAdapter extends BaseAdapter {
         ImageButton buyButton = convertView.findViewById(R.id.button11);
 
         itemNameTextView.setText(itemList.get(position).getItemName());
-        priceCostTextView.setText("$" + itemList.get(position).getPriceCost());
+        itemNameTextView.setFocusable(false);
+        priceCostTextView.setText(itemList.get(position).getPriceCost());
+        priceCostTextView.setFocusable(false);
 
         addButton.setVisibility(View.GONE);
         returnButton.setVisibility(View.GONE);
