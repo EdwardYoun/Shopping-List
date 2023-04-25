@@ -64,6 +64,7 @@ public class ItemAdapter extends BaseAdapter {
         Button checkoutButton = convertView.findViewById(R.id.button12);
         Button removeButton = convertView.findViewById(R.id.button13);
         ImageButton editButton = convertView.findViewById(R.id.button5);
+        ImageButton deleteButton = convertView.findViewById(R.id.button10);
         databaseReference = FirebaseDatabase.getInstance().getReference("items");
 
         itemNameTextView.setText(itemList.get(position).getItemName());
@@ -92,6 +93,13 @@ public class ItemAdapter extends BaseAdapter {
                             "Cannot update with blank fields!",
                             Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                databaseReference.child(itemList.get(position).getId()).removeValue();
             }
         });
 
