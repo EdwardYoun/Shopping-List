@@ -78,7 +78,7 @@ public class ListViewActivity extends AppCompatActivity {
 
                 if (!itemName.isEmpty() && !priceCost.isEmpty()) {
                     String itemId = databaseReference.push().getKey();
-                    Item item = new Item(itemName, priceCost);
+                    Item item = new Item(itemId, itemName, priceCost);
                     databaseReference.child(itemId).setValue(item);
                     itemList.add(item);
                     itemNameEditText.setText("");
@@ -104,6 +104,7 @@ public class ListViewActivity extends AppCompatActivity {
                 // Handle errors here
             }
         });
+
         ImageButton backToUser = (ImageButton) findViewById(R.id.goBackButton1);
         backToUser.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -12,7 +12,13 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import edu.uga.cs.shoppinglist.Item;
@@ -21,6 +27,7 @@ public class ItemAdapter extends BaseAdapter {
 
     private Context context;
     private ArrayList<Item> itemList;
+    private DatabaseReference databaseReference;
 
     public ItemAdapter(Context context, ArrayList<Item> itemList) {
         this.context = context;
@@ -55,6 +62,8 @@ public class ItemAdapter extends BaseAdapter {
         TextView basket = convertView.findViewById(R.id.textView5);
         Button checkoutButton = convertView.findViewById(R.id.button12);
         Button removeButton = convertView.findViewById(R.id.button13);
+        ImageButton editButton = convertView.findViewById(R.id.button5);
+        databaseReference = FirebaseDatabase.getInstance().getReference("items");
 
         itemNameTextView.setText(itemList.get(position).getItemName());
         priceCostTextView.setText(itemList.get(position).getPriceCost());
@@ -64,6 +73,19 @@ public class ItemAdapter extends BaseAdapter {
         basket.setVisibility(View.GONE);
         checkoutButton.setVisibility(View.GONE);
         removeButton.setVisibility(View.GONE);
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String newItemName = itemNameTextView.getText().toString();
+                final String newPriceCost = priceCostTextView.getText().toString();
+
+                if (!newItemName.isEmpty() && !newPriceCost.isEmpty()) {
+                    databaseReference.child(itemList.get(position).getId()).child("itemName").setValue(newItemName);
+                    databaseReference.child(itemList.get(position).getId()).child("priceCost").setValue(newPriceCost);
+                }
+            }
+        });
 
         return convertView;
     }
