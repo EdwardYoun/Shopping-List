@@ -146,11 +146,10 @@ public class ListViewActivity extends AppCompatActivity {
                     int total = 0;
                     String listId = purchasedReference.push().getKey();
                     for (int i = 0; i < basketList.size(); i++) {
-                        Item item = new Item(basketList.get(i).getId(), basketList.get(i).getItemName(), basketList.get(i).getPriceCost());
                         total = total + Integer.parseInt(basketList.get(i).getPriceCost());
-                        purchasedReference.child(listId).child(basketList.get(i).getId()).setValue(item);
                     }
-                    purchasedReference.child(listId).child("total").setValue(total);
+                    Purchased purchased = new Purchased(listId, basketList, total);
+                    purchasedReference.child(listId).setValue(purchased);
                     basketReference.removeValue();
                     Intent intent = new Intent(ListViewActivity.this, PurchasedActivity.class);
                     startActivity(intent);

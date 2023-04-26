@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -15,16 +16,16 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 
-public class PurchasedAdapter extends ArrayAdapter<Item> implements ListAdapter {
+public class PurchasedAdapter extends ArrayAdapter<Purchased> implements ListAdapter {
 
-    private ArrayList<Item> purchasedList;
-    public PurchasedAdapter(Context context, ArrayList<Item> items) {
+    private ArrayList<Purchased> purchasedList;
+    public PurchasedAdapter(Context context, ArrayList<Purchased> items) {
         super(context, 0, items);
         purchasedList = items;
     }
 
     @Override
-    public Item getItem(int position) {
+    public Purchased getItem(int position) {
         return purchasedList.get(position);
     }
 
@@ -34,19 +35,21 @@ public class PurchasedAdapter extends ArrayAdapter<Item> implements ListAdapter 
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Item item = getItem(position);
+        Purchased purchased = getItem(position);
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_purchased, parent, false);
         }
 
-        TextView nameTextView = convertView.findViewById(R.id.item_name);
-        TextView costTextView = convertView.findViewById(R.id.priceCost);
+        TextView recentView = convertView.findViewById(R.id.textView6);
+        TextView itemsView = convertView.findViewById(R.id.textView7);
+        TextView userView = convertView.findViewById(R.id.textView9);
+        EditText totalView = convertView.findViewById(R.id.textView8);
 
+        recentView.setVisibility(View.GONE);
 
-        if (item.getItemName() != null && item.getPriceCost() != null) {
-            nameTextView.setText(item.getItemName());
-            costTextView.setText(String.valueOf(item.getPriceCost()));
-        }
+        //for (int i = 0; i < purchasedList.get(position).getItemList(); i++) {
+
+        //}
 
         return convertView;
     }

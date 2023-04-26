@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -16,30 +19,44 @@ import java.util.ArrayList;
 
 public class PurchasedActivity extends AppCompatActivity {
 
-    private ListView purchasedList;
+    private ArrayList<Purchased> purchasedList;
+    private ListView purchasedView;
+    private PurchasedAdapter purchasedAdapter;
     private DatabaseReference purchasedReference;
+    private TextView itemsView, userView;
+    private EditText totalView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_purchased);
         purchasedReference = FirebaseDatabase.getInstance().getReference("purchased");
-        purchasedList = findViewById(R.id.purchasedItems);
-        purchasedReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        purchasedView = findViewById(R.id.purchasedItems);
+        itemsView = findViewById(R.id.textView7);
+        totalView = findViewById(R.id.textView8);
+        userView = findViewById(R.id.textView9);
+
+        itemsView.setVisibility(View.GONE);
+        totalView.setVisibility(View.GONE);
+        userView.setVisibility(View.GONE);
+
+        purchasedList = new ArrayList<>();
+        purchasedAdapter = new PurchasedAdapter(this, purchasedList);
+        purchasedView.setAdapter(purchasedAdapter);
+
+        purchasedReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<Item> itemList = new ArrayList<>();
-                for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
-                    Item item = itemSnapshot.getValue(Item.class);
-                    itemList.add(item);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                purchasedList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Purchased item = snapshot.getValue(Purchased.class);
+                    purchasedList.add(item);
                 }
-                PurchasedAdapter purchasedAdapter = new PurchasedAdapter(PurchasedActivity.this, itemList);
-                purchasedList.setAdapter(purchasedAdapter);
+                purchasedAdapter.notifyDataSetChanged();
             }
-
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle errors here
             }
         });
     }
