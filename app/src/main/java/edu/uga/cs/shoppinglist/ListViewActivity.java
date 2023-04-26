@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -149,9 +150,14 @@ public class ListViewActivity extends AppCompatActivity {
                         purchasedReference.child(basketList.get(i).getId()).setValue(item);
                     }
                     basketReference.removeValue();
+                    Intent intent = new Intent(ListViewActivity.this, PurchasedActivity.class);
+                    startActivity(intent);
                 }
-                Intent intent = new Intent(ListViewActivity.this, PurchasedActivity.class);
-                startActivity(intent);
+                else {
+                    Toast.makeText(view.getContext(),
+                            "Cannot checkout with zero items!",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

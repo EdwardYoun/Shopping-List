@@ -60,6 +60,13 @@ public class UserActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        recentlyPurchasedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserActivity.this, PurchasedActivity.class);
+                startActivity(intent);
+            }
+        });
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
