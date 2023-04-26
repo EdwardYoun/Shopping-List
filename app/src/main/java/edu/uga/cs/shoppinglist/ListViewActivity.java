@@ -141,14 +141,16 @@ public class ListViewActivity extends AppCompatActivity {
         Button checkoutButton = findViewById(R.id.button12);
         checkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                ArrayList<Item> purchasedList = new ArrayList<>();
-
+            public void onClick(View view) {
                 if(!basketList.isEmpty()) {
+                    int total = 0;
+                    String listId = purchasedReference.push().getKey();
                     for (int i = 0; i < basketList.size(); i++) {
                         Item item = new Item(basketList.get(i).getId(), basketList.get(i).getItemName(), basketList.get(i).getPriceCost());
-                        purchasedReference.child(basketList.get(i).getId()).setValue(item);
+                        total = total + Integer.parseInt(basketList.get(i).getPriceCost());
+                        purchasedReference.child(listId).child(basketList.get(i).getId()).setValue(item);
                     }
+                    purchasedReference.child(listId).child("total").setValue(total);
                     basketReference.removeValue();
                     Intent intent = new Intent(ListViewActivity.this, PurchasedActivity.class);
                     startActivity(intent);
