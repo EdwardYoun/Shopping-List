@@ -90,7 +90,7 @@ public class ListViewActivity extends AppCompatActivity {
             }
         });
 
-        // Listen for changes in the database and update the list adapter with new data
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
