@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -52,7 +53,7 @@ public class GroupActivity extends AppCompatActivity {
                 itemList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Purchased item = snapshot.getValue(Purchased.class);
-                    if (item.getId().equals(position)) {
+                    if (item.getItemList() != null && item.getId().equals(position)) {
                         for (int i = 0; i < item.getItemList().size(); i++) {
                             itemList.add(item.getItemList().get(i));
                         }

@@ -3,10 +3,12 @@ package edu.uga.cs.shoppinglist;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -63,6 +65,15 @@ public class PurchasedActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Handle errors here
+            }
+        });
+
+        ImageButton backToUser = (ImageButton) findViewById(R.id.goBackButton2);
+        backToUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PurchasedActivity.this, UserActivity.class);
+                startActivity(intent);
             }
         });
     }

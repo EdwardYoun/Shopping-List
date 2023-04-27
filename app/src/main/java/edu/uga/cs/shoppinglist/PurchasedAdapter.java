@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -56,9 +57,11 @@ public class PurchasedAdapter extends ArrayAdapter<Purchased> implements ListAda
         EditText totalView = convertView.findViewById(R.id.textView8);
         Button priceButton = convertView.findViewById(R.id.button14);
         Button editButton = convertView.findViewById(R.id.button15);
+        ImageButton backButton = convertView.findViewById(R.id.goBackButton2);
         purchasedReference = FirebaseDatabase.getInstance().getReference("purchased");
 
         recentView.setVisibility(View.GONE);
+        backButton.setVisibility(View.GONE);
 
         for (int i = 0; i < purchasedList.get(position).getItemList().size(); i++) {
             if (i == 0) {
