@@ -12,6 +12,8 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
@@ -40,6 +42,8 @@ public class PurchasedAdapter extends ArrayAdapter<Purchased> implements ListAda
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_purchased, parent, false);
         }
 
+        String group = "";
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         TextView recentView = convertView.findViewById(R.id.textView6);
         TextView itemsView = convertView.findViewById(R.id.textView7);
         TextView userView = convertView.findViewById(R.id.textView9);
@@ -47,9 +51,17 @@ public class PurchasedAdapter extends ArrayAdapter<Purchased> implements ListAda
 
         recentView.setVisibility(View.GONE);
 
-        //for (int i = 0; i < purchasedList.get(position).getItemList(); i++) {
-
-        //}
+        for (int i = 0; i < purchasedList.get(position).getItemList().size(); i++) {
+            if (i == 0) {
+                group = purchasedList.get(position).getItemList().get(i).getItemName();
+            }
+            else {
+                group = group + ", " + purchasedList.get(position).getItemList().get(i).getItemName();
+            }
+        }
+        itemsView.setText(group);
+        totalView.setText(Integer.toString(purchasedList.get(position).getTotal()));
+        userView.setText(purchasedList.get(position).getUser());
 
         return convertView;
     }

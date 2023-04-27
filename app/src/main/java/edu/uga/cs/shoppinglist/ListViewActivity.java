@@ -15,6 +15,8 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DataSnapshot;
@@ -143,12 +145,13 @@ public class ListViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(!basketList.isEmpty()) {
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     int total = 0;
                     String listId = purchasedReference.push().getKey();
                     for (int i = 0; i < basketList.size(); i++) {
                         total = total + Integer.parseInt(basketList.get(i).getPriceCost());
                     }
-                    Purchased purchased = new Purchased(listId, basketList, total);
+                    Purchased purchased = new Purchased(listId, basketList, total, user.getEmail());
                     purchasedReference.child(listId).setValue(purchased);
                     basketReference.removeValue();
                     Intent intent = new Intent(ListViewActivity.this, PurchasedActivity.class);
