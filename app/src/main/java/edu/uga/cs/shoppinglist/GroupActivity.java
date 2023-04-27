@@ -3,10 +3,10 @@ package edu.uga.cs.shoppinglist;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,47 +18,47 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class PurchasedActivity extends AppCompatActivity {
+public class GroupActivity extends AppCompatActivity {
 
-    private ArrayList<Purchased> purchasedList;
-    private ListView purchasedView;
-    private PurchasedAdapter purchasedAdapter;
+    private ArrayList<Item> itemList;
+    private GroupAdapter groupAdapter;
+    private ListView groupView;
+    private TextView textView;
+    private Button removeButton;
     private DatabaseReference purchasedReference;
-    private TextView itemsView, userView;
-    private EditText totalView;
-    private Button priceButton, editButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_purchased);
+        setContentView(R.layout.activity_group);
         purchasedReference = FirebaseDatabase.getInstance().getReference("purchased");
-        purchasedView = findViewById(R.id.purchasedItems);
-        itemsView = findViewById(R.id.textView7);
-        totalView = findViewById(R.id.textView8);
-        userView = findViewById(R.id.textView9);
-        priceButton = findViewById(R.id.button14);
-        editButton = findViewById(R.id.button15);
+        groupView = findViewById(R.id.groupList);
+        textView = findViewById(R.id.textView10);
+        removeButton = findViewById(R.id.button16);
+        Intent intent = getIntent();
+        Bundle extra = intent.getExtras();
+        String position = extra.getString("position");
 
-        itemsView.setVisibility(View.GONE);
-        totalView.setVisibility(View.GONE);
-        userView.setVisibility(View.GONE);
-        priceButton.setVisibility(View.GONE);
-        editButton.setVisibility(View.GONE);
+        itemList = new ArrayList<>();
+        groupAdapter = new GroupAdapter(this, itemList, position);
+        groupView.setAdapter(groupAdapter);
 
-        purchasedList = new ArrayList<>();
-        purchasedAdapter = new PurchasedAdapter(this, purchasedList);
-        purchasedView.setAdapter(purchasedAdapter);
+        textView.setVisibility(View.GONE);
+        removeButton.setVisibility(View.GONE);
 
         purchasedReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                purchasedList.clear();
+                itemList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Purchased item = snapshot.getValue(Purchased.class);
-                    purchasedList.add(item);
+                    if (item.getId().equals(position)) {
+                        for (int i = 0; i < item.getItemList().size(); i++) {
+                            itemList.add(item.getItemList().get(i));
+                        }
+                    }
                 }
-                purchasedAdapter.notifyDataSetChanged();
+                groupAdapter.notifyDataSetChanged();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {

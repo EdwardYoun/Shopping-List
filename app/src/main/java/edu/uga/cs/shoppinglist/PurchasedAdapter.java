@@ -2,6 +2,8 @@ package edu.uga.cs.shoppinglist;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +55,7 @@ public class PurchasedAdapter extends ArrayAdapter<Purchased> implements ListAda
         TextView userView = convertView.findViewById(R.id.textView9);
         EditText totalView = convertView.findViewById(R.id.textView8);
         Button priceButton = convertView.findViewById(R.id.button14);
+        Button editButton = convertView.findViewById(R.id.button15);
         purchasedReference = FirebaseDatabase.getInstance().getReference("purchased");
 
         recentView.setVisibility(View.GONE);
@@ -83,6 +86,17 @@ public class PurchasedAdapter extends ArrayAdapter<Purchased> implements ListAda
                             "Cannot update with blank field!",
                             Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle extra = new Bundle();
+                extra.putString("position", purchasedList.get(position).getId());
+                Intent intent = new Intent(getContext(), GroupActivity.class);
+                intent.putExtras(extra);
+                getContext().startActivity(intent);
             }
         });
 
