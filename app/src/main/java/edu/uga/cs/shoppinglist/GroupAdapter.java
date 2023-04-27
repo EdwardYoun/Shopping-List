@@ -22,7 +22,7 @@ public class GroupAdapter extends BaseAdapter {
 
     private Context context;
     private ArrayList<Item> itemList;
-    private DatabaseReference purchasedReference;
+    private DatabaseReference purchasedReference, databaseReference;
     private String id;
 
     public GroupAdapter(Context context, ArrayList<Item> itemList, String id) {
@@ -55,6 +55,7 @@ public class GroupAdapter extends BaseAdapter {
         TextView itemView = convertView.findViewById(R.id.textView10);
         Button removeButton = convertView.findViewById(R.id.button16);
         purchasedReference = FirebaseDatabase.getInstance().getReference("purchased");
+        databaseReference = FirebaseDatabase.getInstance().getReference("items");
         ImageButton backButton = convertView.findViewById(R.id.goBackButton3);
 
         backButton.setVisibility(View.GONE);
@@ -65,6 +66,7 @@ public class GroupAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 purchasedReference.child(id).child("itemList").child(Integer.toString(position)).removeValue();
+                databaseReference.child(itemList.get(position).getId()).setValue(itemList.get(position));
                 if (itemList.size() == 1) {
                     purchasedReference.child(id).removeValue();
                     Intent intent = new Intent(v.getContext(), PurchasedActivity.class);
