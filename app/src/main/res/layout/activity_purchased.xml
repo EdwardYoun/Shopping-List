@@ -43,11 +43,20 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="User" />
+
+        <Button
+            android:id="@+id/button14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Update Price" />
     </LinearLayout>
 
     <ListView
         android:id="@+id/purchasedItems"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_weight="1" >
+
+    </ListView>
 </LinearLayout>

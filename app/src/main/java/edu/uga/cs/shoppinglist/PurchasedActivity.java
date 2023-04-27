@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ public class PurchasedActivity extends AppCompatActivity {
     private DatabaseReference purchasedReference;
     private TextView itemsView, userView;
     private EditText totalView;
+    private Button priceButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +37,12 @@ public class PurchasedActivity extends AppCompatActivity {
         itemsView = findViewById(R.id.textView7);
         totalView = findViewById(R.id.textView8);
         userView = findViewById(R.id.textView9);
+        priceButton = findViewById(R.id.button14);
 
         itemsView.setVisibility(View.GONE);
         totalView.setVisibility(View.GONE);
         userView.setVisibility(View.GONE);
+        priceButton.setVisibility(View.GONE);
 
         purchasedList = new ArrayList<>();
         purchasedAdapter = new PurchasedAdapter(this, purchasedList);
