@@ -66,5 +66,14 @@ public class GroupActivity extends AppCompatActivity {
                 // Handle errors here
             }
         });
+
+        ImageButton backToUser = (ImageButton) findViewById(R.id.goBackButton3);
+        backToUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(GroupActivity.this, PurchasedActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

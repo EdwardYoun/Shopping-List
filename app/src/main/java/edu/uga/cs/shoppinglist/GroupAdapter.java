@@ -55,6 +55,9 @@ public class GroupAdapter extends BaseAdapter {
         TextView itemView = convertView.findViewById(R.id.textView10);
         Button removeButton = convertView.findViewById(R.id.button16);
         purchasedReference = FirebaseDatabase.getInstance().getReference("purchased");
+        ImageButton backButton = convertView.findViewById(R.id.goBackButton3);
+
+        backButton.setVisibility(View.GONE);
 
         itemView.setText(itemList.get(position).getItemName());
 
