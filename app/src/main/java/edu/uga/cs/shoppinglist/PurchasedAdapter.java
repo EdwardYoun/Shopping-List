@@ -72,13 +72,14 @@ public class PurchasedAdapter extends ArrayAdapter<Purchased> implements ListAda
             }
         }
         itemsView.setText(group);
-        totalView.setText("$" + Integer.toString(purchasedList.get(position).getTotal()));
+        totalView.setText("$" + Double.toString(purchasedList.get(position).getTotal()));
         userView.setText(purchasedList.get(position).getUser());
 
         priceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final String newTotal = totalView.getText().toString().replace("$","");
+                newTotal.replace(" ", "");
 
                 if (!newTotal.isEmpty()) {
                     purchasedReference.child(purchasedList.get(position).getId()).child("total").setValue(Integer.parseInt(newTotal));
