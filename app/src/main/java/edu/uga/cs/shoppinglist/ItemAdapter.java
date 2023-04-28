@@ -21,10 +21,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import edu.uga.cs.shoppinglist.Item;
 
 public class ItemAdapter extends BaseAdapter {
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     private Context context;
     private ArrayList<Item> itemList;
@@ -79,18 +81,28 @@ public class ItemAdapter extends BaseAdapter {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 final String newItemName = itemNameTextView.getText().toString();
                 final String newPriceCost = priceCostTextView.getText().toString();
-
-                if (!newItemName.isEmpty() && !newPriceCost.isEmpty()) {
-                    databaseReference.child(itemList.get(position).getId()).child("itemName").setValue(newItemName);
-                    databaseReference.child(itemList.get(position).getId()).child("priceCost").setValue(newPriceCost);
-                }
-                else {
+                try {
+                    if (!newItemName.isEmpty() && !newPriceCost.isEmpty()) {
+                        Double doub = Double.valueOf(newPriceCost);
+                        databaseReference.child(itemList.get(position).getId()).child("itemName").setValue(newItemName);
+                        databaseReference.child(itemList.get(position).getId()).child("priceCost").setValue(String.format("%.2f", doub));
+                        itemNameTextView.setText(newItemName);
+                        priceCostTextView.setText(String.format("%.2f", doub));
+                    } else {
+                        itemNameTextView.setText(itemList.get(position).getItemName());
+                        priceCostTextView.setText(itemList.get(position).getPriceCost());
+                        Toast.makeText(v.getContext(),
+                                "Cannot update with blank fields!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                } catch (NumberFormatException ex) {
                     itemNameTextView.setText(itemList.get(position).getItemName());
                     priceCostTextView.setText(itemList.get(position).getPriceCost());
                     Toast.makeText(v.getContext(),
-                            "Cannot update with blank fields!",
+                            "Price must be a number!",
                             Toast.LENGTH_SHORT).show();
                 }
             }

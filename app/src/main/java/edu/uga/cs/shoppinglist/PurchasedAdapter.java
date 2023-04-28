@@ -22,9 +22,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class PurchasedAdapter extends ArrayAdapter<Purchased> implements ListAdapter {
+
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     private ArrayList<Purchased> purchasedList;
     private DatabaseReference purchasedReference;
@@ -72,22 +75,30 @@ public class PurchasedAdapter extends ArrayAdapter<Purchased> implements ListAda
             }
         }
         itemsView.setText(group);
-        totalView.setText(Double.toString(purchasedList.get(position).getTotal()));
+        totalView.setText(String.format("%.2f", purchasedList.get(position).getTotal()));
         userView.setText(purchasedList.get(position).getUser());
 
         priceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String newTotal = totalView.getText().toString().replace("$","");
-                newTotal.replace(" ", "");
+                String newTotal = totalView.getText().toString();
 
-                if (!newTotal.isEmpty()) {
-                    purchasedReference.child(purchasedList.get(position).getId()).child("total").setValue(Double.parseDouble(newTotal));
-                }
-                else {
+                try {
+                    if (!newTotal.isEmpty()) {
+                        Double doub = Double.valueOf(newTotal);
+                        doub = Math.round(doub * 100.0) / 100.0;
+                        purchasedReference.child(purchasedList.get(position).getId()).child("total").setValue(doub);
+                        totalView.setText(String.format("%.2f", doub));
+                    } else {
+                        totalView.setText(Double.toString(purchasedList.get(position).getTotal()));
+                        Toast.makeText(v.getContext(),
+                                "Cannot update with blank field!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                } catch (NumberFormatException ex) {
                     totalView.setText(Double.toString(purchasedList.get(position).getTotal()));
                     Toast.makeText(v.getContext(),
-                            "Cannot update with blank field!",
+                            "Price must be a number!",
                             Toast.LENGTH_SHORT).show();
                 }
             }

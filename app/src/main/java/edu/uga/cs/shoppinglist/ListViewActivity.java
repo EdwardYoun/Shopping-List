@@ -80,14 +80,29 @@ public class ListViewActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String itemName = itemNameEditText.getText().toString();
                 final String priceCost = priceCostEditText.getText().toString();
-
-                if (!itemName.isEmpty() && !priceCost.isEmpty()) {
-                    String itemId = databaseReference.push().getKey();
-                    Item item = new Item(itemId, itemName, priceCost);
-                    databaseReference.child(itemId).setValue(item);
+                try {
+                    if (!itemName.isEmpty() && !priceCost.isEmpty()) {
+                        Double doub = Double.valueOf(priceCost);
+                        String itemId = databaseReference.push().getKey();
+                        Item item = new Item(itemId, itemName, String.format("%.2f", doub));
+                        databaseReference.child(itemId).setValue(item);
+                        itemNameEditText.setText("");
+                        priceCostEditText.setText("");
+                        //itemAdapter.notifyDataSetChanged();
+                    }
+                    else {
+                        itemNameEditText.setText("");
+                        priceCostEditText.setText("");
+                        Toast.makeText(v.getContext(),
+                                "Cannot add with blank fields!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                } catch (NumberFormatException ex) {
                     itemNameEditText.setText("");
                     priceCostEditText.setText("");
-                    //itemAdapter.notifyDataSetChanged();
+                    Toast.makeText(v.getContext(),
+                            "Price must be a number!",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
