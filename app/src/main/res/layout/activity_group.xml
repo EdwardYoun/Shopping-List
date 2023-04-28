@@ -11,30 +11,46 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="20"
+        android:layout_weight="16"
         android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/goBackButton3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
             android:layout_gravity="center"
-            android:layout_weight="1"
             app:srcCompat="?attr/homeAsUpIndicator" />
 
         <TextView
             android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_weight="1"
-            android:text="Remove" />
+            android:text="Recently Purchased Items"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="Cost"
+            android:textSize="20sp"/>
 
         <Button
             android:id="@+id/button16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Remove" />
+            android:text="Remove"
+            android:textSize="14sp"/>
+
     </LinearLayout>
 
     <ListView

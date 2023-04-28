@@ -55,8 +55,8 @@ public class PurchasedAdapter extends ArrayAdapter<Purchased> implements ListAda
         TextView itemsView = convertView.findViewById(R.id.textView7);
         TextView userView = convertView.findViewById(R.id.textView9);
         EditText totalView = convertView.findViewById(R.id.textView8);
-        Button priceButton = convertView.findViewById(R.id.button14);
-        Button editButton = convertView.findViewById(R.id.button15);
+        ImageButton priceButton = convertView.findViewById(R.id.button14);
+        ImageButton editButton = convertView.findViewById(R.id.button15);
         ImageButton backButton = convertView.findViewById(R.id.goBackButton2);
         purchasedReference = FirebaseDatabase.getInstance().getReference("purchased");
 
@@ -72,7 +72,7 @@ public class PurchasedAdapter extends ArrayAdapter<Purchased> implements ListAda
             }
         }
         itemsView.setText(group);
-        totalView.setText(Integer.toString(purchasedList.get(position).getTotal()));
+        totalView.setText("$ " + Integer.toString(purchasedList.get(position).getTotal()));
         userView.setText(purchasedList.get(position).getUser());
 
         priceButton.setOnClickListener(new View.OnClickListener() {

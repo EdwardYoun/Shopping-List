@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,7 +29,7 @@ public class PurchasedActivity extends AppCompatActivity {
     private DatabaseReference purchasedReference;
     private TextView itemsView, userView;
     private EditText totalView;
-    private Button priceButton, editButton;
+    private ImageButton priceButton, editButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

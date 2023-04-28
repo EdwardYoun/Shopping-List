@@ -53,6 +53,7 @@ public class GroupAdapter extends BaseAdapter {
         }
 
         TextView itemView = convertView.findViewById(R.id.textView10);
+        TextView itemCost = convertView.findViewById(R.id.textView25);
         Button removeButton = convertView.findViewById(R.id.button16);
         purchasedReference = FirebaseDatabase.getInstance().getReference("purchased");
         databaseReference = FirebaseDatabase.getInstance().getReference("items");
@@ -61,7 +62,7 @@ public class GroupAdapter extends BaseAdapter {
         backButton.setVisibility(View.GONE);
 
         itemView.setText(itemList.get(position).getItemName());
-
+        itemCost.setText("$ " + itemList.get(position).getPriceCost());
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +80,7 @@ public class GroupAdapter extends BaseAdapter {
                         purchasedReference.child(id).child("itemList").child(Integer.toString(i)).child("priceCost").setValue(itemList.get(i+1).getPriceCost());
                         itemView.setText(itemList.get(i+1).getItemName());
                         purchasedReference.child(id).child("itemList").child(Integer.toString(i+1)).removeValue();
+
                     }
                 }
             }

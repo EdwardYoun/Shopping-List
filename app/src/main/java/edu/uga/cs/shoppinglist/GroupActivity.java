@@ -24,7 +24,7 @@ public class GroupActivity extends AppCompatActivity {
     private ArrayList<Item> itemList;
     private GroupAdapter groupAdapter;
     private ListView groupView;
-    private TextView textView;
+    private TextView textView, itemCost;
     private Button removeButton;
     private DatabaseReference purchasedReference;
 
@@ -35,6 +35,7 @@ public class GroupActivity extends AppCompatActivity {
         purchasedReference = FirebaseDatabase.getInstance().getReference("purchased");
         groupView = findViewById(R.id.groupList);
         textView = findViewById(R.id.textView10);
+        itemCost = findViewById(R.id.textView25);
         removeButton = findViewById(R.id.button16);
         Intent intent = getIntent();
         Bundle extra = intent.getExtras();
@@ -44,7 +45,7 @@ public class GroupActivity extends AppCompatActivity {
         groupAdapter = new GroupAdapter(this, itemList, position);
         groupView.setAdapter(groupAdapter);
 
-        textView.setVisibility(View.GONE);
+        itemCost.setVisibility(View.GONE);
         removeButton.setVisibility(View.GONE);
 
         purchasedReference.addValueEventListener(new ValueEventListener() {
