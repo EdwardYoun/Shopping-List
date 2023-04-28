@@ -5,13 +5,13 @@ import java.util.ArrayList;
 public class Purchased {
 
     private ArrayList<Item> itemList;
-    private int total;
+    private double total;
     private String user;
     private String id;
 
     public Purchased(){}
 
-    public Purchased(String id, ArrayList<Item> itemList, int total, String user) {
+    public Purchased(String id, ArrayList<Item> itemList, double total, String user) {
         this.itemList = itemList;
         this.total = total;
         this.user = user;
@@ -26,9 +26,9 @@ public class Purchased {
         this.itemList = itemList;
     }
 
-    public int getTotal() { return total; }
+    public double getTotal() { return total; }
 
-    public void setTotal(int total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 

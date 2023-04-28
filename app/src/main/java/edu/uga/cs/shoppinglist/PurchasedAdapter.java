@@ -72,7 +72,7 @@ public class PurchasedAdapter extends ArrayAdapter<Purchased> implements ListAda
             }
         }
         itemsView.setText(group);
-        totalView.setText("$" + Double.toString(purchasedList.get(position).getTotal()));
+        totalView.setText(Double.toString(purchasedList.get(position).getTotal()));
         userView.setText(purchasedList.get(position).getUser());
 
         priceButton.setOnClickListener(new View.OnClickListener() {
@@ -82,10 +82,10 @@ public class PurchasedAdapter extends ArrayAdapter<Purchased> implements ListAda
                 newTotal.replace(" ", "");
 
                 if (!newTotal.isEmpty()) {
-                    purchasedReference.child(purchasedList.get(position).getId()).child("total").setValue(Integer.parseInt(newTotal));
+                    purchasedReference.child(purchasedList.get(position).getId()).child("total").setValue(Double.parseDouble(newTotal));
                 }
                 else {
-                    totalView.setText(Integer.toString(purchasedList.get(position).getTotal()));
+                    totalView.setText(Double.toString(purchasedList.get(position).getTotal()));
                     Toast.makeText(v.getContext(),
                             "Cannot update with blank field!",
                             Toast.LENGTH_SHORT).show();

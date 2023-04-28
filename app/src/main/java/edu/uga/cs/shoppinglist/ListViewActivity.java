@@ -146,11 +146,13 @@ public class ListViewActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(!basketList.isEmpty()) {
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                    int total = 0;
+                    double total = 0;
                     String listId = purchasedReference.push().getKey();
                     for (int i = 0; i < basketList.size(); i++) {
-                        total = total + Integer.parseInt(basketList.get(i).getPriceCost());
+                        total = total + Double.parseDouble(basketList.get(i).getPriceCost());
                     }
+                    total = total * 1.049;
+                    total = Math.round(total * 100.0) / 100.0;
                     Purchased purchased = new Purchased(listId, basketList, total, user.getEmail());
                     purchasedReference.child(listId).setValue(purchased);
                     basketReference.removeValue();

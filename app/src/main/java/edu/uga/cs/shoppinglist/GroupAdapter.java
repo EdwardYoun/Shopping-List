@@ -29,23 +29,11 @@ public class GroupAdapter extends BaseAdapter {
     private ArrayList<Item> itemList;
     private DatabaseReference purchasedReference, databaseReference;
     private String id;
-    private Double total;
 
     public GroupAdapter(Context context, ArrayList<Item> itemList, String id) {
         this.context = context;
         this.itemList = itemList;
         this.id = id;
-        FirebaseDatabase.getInstance().getReference("purchased").child(id).child("total").addListenerForSingleValueEvent(new ValueEventListener() {
-
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                total = snapshot.getValue(Double.class);
-            }
-
-
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("TAG", "Failed to read value.", error.toException());
-            }
-        });
 
     }
 
@@ -80,7 +68,7 @@ public class GroupAdapter extends BaseAdapter {
         backButton.setVisibility(View.GONE);
 
         itemView.setText(itemList.get(position).getItemName());
-        itemCost.setText("$ " + itemList.get(position).getPriceCost());
+        itemCost.setText("$" + itemList.get(position).getPriceCost());
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,10 +86,6 @@ public class GroupAdapter extends BaseAdapter {
                         purchasedReference.child(id).child("itemList").child(Integer.toString(i)).child("priceCost").setValue(itemList.get(i+1).getPriceCost());
                         itemView.setText(itemList.get(i+1).getItemName());
                         purchasedReference.child(id).child("itemList").child(Integer.toString(i+1)).removeValue();
-                        Double cost = Double.parseDouble(itemList.get(position).getPriceCost());
-                        total -= cost;
-                        purchasedReference.child(id).child("total").setValue(total);
-
                     }
                 }
             }
