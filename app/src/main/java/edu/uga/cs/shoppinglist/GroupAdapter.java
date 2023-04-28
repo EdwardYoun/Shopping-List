@@ -1,10 +1,12 @@
 package edu.uga.cs.shoppinglist;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +15,11 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -24,11 +29,24 @@ public class GroupAdapter extends BaseAdapter {
     private ArrayList<Item> itemList;
     private DatabaseReference purchasedReference, databaseReference;
     private String id;
+    private Double total;
 
     public GroupAdapter(Context context, ArrayList<Item> itemList, String id) {
         this.context = context;
         this.itemList = itemList;
         this.id = id;
+        FirebaseDatabase.getInstance().getReference("purchased").child(id).child("total").addListenerForSingleValueEvent(new ValueEventListener() {
+
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                total = snapshot.getValue(Double.class);
+            }
+
+
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("TAG", "Failed to read value.", error.toException());
+            }
+        });
+
     }
 
     @Override
@@ -80,6 +98,9 @@ public class GroupAdapter extends BaseAdapter {
                         purchasedReference.child(id).child("itemList").child(Integer.toString(i)).child("priceCost").setValue(itemList.get(i+1).getPriceCost());
                         itemView.setText(itemList.get(i+1).getItemName());
                         purchasedReference.child(id).child("itemList").child(Integer.toString(i+1)).removeValue();
+                        Double cost = Double.parseDouble(itemList.get(position).getPriceCost());
+                        total -= cost;
+                        purchasedReference.child(id).child("total").setValue(total);
 
                     }
                 }
@@ -88,4 +109,5 @@ public class GroupAdapter extends BaseAdapter {
 
         return convertView;
     }
+
 }
