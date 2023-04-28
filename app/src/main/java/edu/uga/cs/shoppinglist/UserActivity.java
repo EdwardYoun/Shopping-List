@@ -75,5 +75,12 @@ public class UserActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        settleCostButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(UserActivity.this, SettleActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

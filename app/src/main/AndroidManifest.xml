@@ -15,6 +15,9 @@
         android:theme="@style/Theme.ShoppingList"
         tools:targetApi="31">
         <activity
+            android:name=".SettleActivity"
+            android:exported="false" />
+        <activity
             android:name=".GroupAdapter"
             android:exported="false" />
         <activity
