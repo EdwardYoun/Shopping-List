@@ -199,4 +199,16 @@ public class ListViewActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (!basketList.isEmpty()) {
+            for (int i = 0; i < basketList.size(); i++) {
+                Item item = new Item(basketList.get(i).getId(), basketList.get(i).getItemName(), basketList.get(i).getPriceCost());
+                databaseReference.child(basketList.get(i).getId()).setValue(item);
+            }
+            basketReference.removeValue();
+        }
+    }
+
 }

@@ -44,7 +44,8 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/userList"
+        android:id="@+id/userList1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
 </LinearLayout>
