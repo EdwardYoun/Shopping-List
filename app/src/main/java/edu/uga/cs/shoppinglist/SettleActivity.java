@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
@@ -23,12 +24,13 @@ import java.util.Map;
 
 public class SettleActivity extends AppCompatActivity {
 
+    private static final String DEBUG_TAG = "SettleActivity";
+
     private ListView settleView;
     private TextView totalView;
-    private DatabaseReference purchasedReference;
     private DatabaseReference userReference;
-    private ArrayList<String> userList;
-
+    private ArrayList<Email> userList;
+    private EmailAdapter emailAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,44 +39,29 @@ public class SettleActivity extends AppCompatActivity {
 
         settleView = findViewById(R.id.userList);
         totalView = findViewById(R.id.totalCost);
-        purchasedReference = FirebaseDatabase.getInstance().getReference("purchased");
+
+        userList = new ArrayList<>();
+        emailAdapter = new EmailAdapter(this, userList);
+        settleView.setAdapter(emailAdapter);
 
         userReference = FirebaseDatabase.getInstance().getReference("users");
 
-        String test = "test";
-        userList = new ArrayList<>();
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, userList);
-        settleView.setAdapter(adapter);
-
-
         totalView.setVisibility(View.GONE);
 
-
-        purchasedReference.addValueEventListener(new ValueEventListener() {
+        userReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 userList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Purchased item = snapshot.getValue(Purchased.class);
-
-                        for (int i = 0; i < item.getItemList().size(); i++) {
-                            userList.add(item.getUser());
-                        }
-
+                    Email user = snapshot.getValue(Email.class);
+                        userList.add(user);
                 }
-
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Handle errors here
             }
         });
-
-
-
-
-
-
 
         ImageButton backToUser = (ImageButton) findViewById(R.id.goBackButton4);
         backToUser.setOnClickListener(new View.OnClickListener() {

@@ -17,6 +17,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
@@ -25,6 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
     private static final String DEBUG_TAG = "RegisterActivity";
     private EditText emailEditText;
     private EditText passwordEditText;
+    private DatabaseReference userReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         emailEditText = findViewById( R.id.editTextTextPersonName3 );
         passwordEditText = findViewById( R.id.editTextTextPersonName2 );
+        userReference = FirebaseDatabase.getInstance().getReference("users");
 
         Button registerButton = findViewById( R.id.button4 );
         registerButton.setOnClickListener( new RegisterButtonClickListener() );
@@ -77,6 +81,8 @@ public class RegisterActivity extends AppCompatActivity {
                                     Log.d(DEBUG_TAG, "createUserWithEmail: success");
 
                                     FirebaseUser user = firebaseAuth.getCurrentUser();
+                                    String userId = userReference.push().getKey();
+                                    userReference.child(userId).child("email").setValue(user.getEmail());
 
                                     Intent intent = new Intent(RegisterActivity.this, UserActivity.class);
                                     startActivity(intent);
