@@ -184,8 +184,6 @@ public class ListViewActivity extends AppCompatActivity {
 
     }
 
-
-
     @Override
     public void onBackPressed() {
         if (!basketList.isEmpty()) {
@@ -197,18 +195,6 @@ public class ListViewActivity extends AppCompatActivity {
         }
         Intent intent = new Intent(ListViewActivity.this, UserActivity.class);
         startActivity(intent);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (!basketList.isEmpty()) {
-            for (int i = 0; i < basketList.size(); i++) {
-                Item item = new Item(basketList.get(i).getId(), basketList.get(i).getItemName(), basketList.get(i).getPriceCost());
-                databaseReference.child(basketList.get(i).getId()).setValue(item);
-            }
-            basketReference.removeValue();
-        }
     }
 
 }

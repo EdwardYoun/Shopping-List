@@ -101,10 +101,4 @@ public class SettleActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        purchasedReference.removeValue();
-    }
-
 }
