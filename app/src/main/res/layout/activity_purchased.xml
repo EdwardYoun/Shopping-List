@@ -57,7 +57,7 @@
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
                     android:fadeScrollbars="false"
-                    android:maxWidth="100dp"
+                    android:maxWidth="90dp"
                     android:maxHeight="120dp"
                     android:text="Items"
                     android:textSize="15sp" />
@@ -77,7 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:minWidth="66dp"
+            android:minWidth="70dp"
             android:maxHeight="50dp"
             android:text="Total"
             android:textSize="16sp"/>
@@ -86,9 +86,9 @@
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxWidth="140dp"
+            android:maxWidth="125dp"
             android:gravity="right"
-            android:layout_marginEnd="4dp"
+            android:layout_marginEnd="2dp"
             android:text="User" />
 
         <ImageButton
