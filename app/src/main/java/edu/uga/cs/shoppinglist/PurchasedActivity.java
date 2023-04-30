@@ -28,7 +28,7 @@ public class PurchasedActivity extends AppCompatActivity {
     private ListView purchasedView;
     private PurchasedAdapter purchasedAdapter;
     private DatabaseReference purchasedReference;
-    private TextView itemsView, userView;
+    private TextView itemsView, userView, dollarSign;
     private EditText totalView;
     private ImageButton priceButton, editButton;
 
@@ -43,12 +43,14 @@ public class PurchasedActivity extends AppCompatActivity {
         userView = findViewById(R.id.textView9);
         priceButton = findViewById(R.id.button14);
         editButton = findViewById(R.id.button15);
+        dollarSign =findViewById(R.id.textView11);
 
         itemsView.setVisibility(View.GONE);
         totalView.setVisibility(View.GONE);
         userView.setVisibility(View.GONE);
         priceButton.setVisibility(View.GONE);
         editButton.setVisibility(View.GONE);
+        dollarSign.setVisibility(View.GONE);
 
         purchasedList = new ArrayList<>();
         purchasedAdapter = new PurchasedAdapter(this, purchasedList);
