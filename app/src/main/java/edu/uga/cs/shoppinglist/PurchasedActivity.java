@@ -32,6 +32,11 @@ public class PurchasedActivity extends AppCompatActivity {
     private EditText totalView;
     private ImageButton priceButton, editButton;
 
+    /**
+     * Sets up the purchased activity.
+     * Layout for list of purchased item groups.
+     * @param savedInstanceState Saved instance state bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +79,10 @@ public class PurchasedActivity extends AppCompatActivity {
 
         ImageButton backToUser = (ImageButton) findViewById(R.id.goBackButton2);
         backToUser.setOnClickListener(new View.OnClickListener() {
+            /**
+             * OnClickListener to return to MainActivity
+             * @param view
+             */
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PurchasedActivity.this, UserActivity.class);

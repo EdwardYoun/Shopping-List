@@ -20,16 +20,28 @@ public class BasketAdapter extends BaseAdapter {
     private ArrayList<Item> itemList;
     private DatabaseReference databaseReference, basketReference;
 
+    /**
+     * Adapter for the Shopping Basket.
+     * @param context Context of app.
+     * @param itemList List of items in shopping basket.
+     */
     public BasketAdapter(Context context, ArrayList<Item> itemList) {
         this.context = context;
         this.itemList = itemList;
     }
 
+    /**
+     * @return size of the list of items in the Shopping list.
+     */
     @Override
     public int getCount() {
         return itemList.size();
     }
 
+    /**
+     * @param position Position in the list.
+     * @return item at postion.
+     */
     @Override
     public Object getItem(int position) {
         return itemList.get(position);
@@ -40,6 +52,17 @@ public class BasketAdapter extends BaseAdapter {
         return position;
     }
 
+    /**
+     * This method gets the view of the item in the Shopping Basket.
+     * If the view is null, then it inflates the layout of the item in the Shopping Basket.
+     * It sets the text of the item name and its price.
+     * It also sets the visibility of the add, return, basket, checkout, edit, delete and buy button to gone.
+     * If remove button is clicked, it removes the item from the Shopping Basket and adds it back to the Shopping List.
+     * @param position Position in shopping list.
+     * @param convertView The view to be recycled.
+     * @param parent The parent view the item will be attached to.
+     * @return List of items added to the shopping basket
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
@@ -73,6 +96,14 @@ public class BasketAdapter extends BaseAdapter {
         buyButton.setVisibility(View.GONE);
 
         removeButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * This method gets the view of the item in the Shopping Basket.
+             * If the view is null, then it inflates the layout of the item in the Shopping Basket.
+             * It sets the text of the item name and its price.
+             * It also sets the visibility of the add, return, basket, checkout, edit, delete and buy button to gone.
+             * If remove button is clicked, it removes the item from the Shopping Basket and adds it back to the Shopping List.
+             * @param v View of the remove button.
+             */
             @Override
             public void onClick(View v) {
                 Item item = new Item(itemList.get(position).getId(), itemList.get(position).getItemName(), itemList.get(position).getPriceCost());
