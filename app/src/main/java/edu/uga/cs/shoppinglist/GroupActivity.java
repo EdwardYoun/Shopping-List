@@ -28,6 +28,11 @@ public class GroupActivity extends AppCompatActivity {
     private Button removeButton;
     private DatabaseReference purchasedReference;
 
+    /**
+     * Sets up the GroupActivity and initializes the item list and adapter. This is a list of purchased items.
+     * Also listens for changes in the Firebase database.
+     * @param savedInstanceState Saved instance state bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +54,10 @@ public class GroupActivity extends AppCompatActivity {
         removeButton.setVisibility(View.GONE);
 
         purchasedReference.addValueEventListener(new ValueEventListener() {
+            /**
+             * Listens for changes on firebase database.
+             * @param dataSnapshot The current data at the location
+             */
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 itemList.clear();
@@ -70,6 +79,10 @@ public class GroupActivity extends AppCompatActivity {
 
         ImageButton backToUser = (ImageButton) findViewById(R.id.goBackButton3);
         backToUser.setOnClickListener(new View.OnClickListener() {
+            /**
+             * On click listener to return to the PurchasedActivity with the list of purchased lists.
+             * @param view
+             */
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(GroupActivity.this, PurchasedActivity.class);

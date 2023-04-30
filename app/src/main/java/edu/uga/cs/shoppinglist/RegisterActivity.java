@@ -29,6 +29,11 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText passwordEditText;
     private DatabaseReference userReference;
 
+    /**
+     * Sets up the registerActivity to register a new user.
+     * Connects to the Firebase database "users" path.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -32,20 +32,45 @@ public class PurchasedAdapter extends ArrayAdapter<Purchased> implements ListAda
 
     private ArrayList<Purchased> purchasedList;
     private DatabaseReference purchasedReference;
+
+    /**
+     * This is the constructor of the PurchasedAdapter class.
+     * It initializes the adapter with the given list of Purchased objects.
+     * @param context Context of adapter
+     * @param items list of Purchased objects to be displayed.
+     */
     public PurchasedAdapter(Context context, ArrayList<Purchased> items) {
         super(context, 0, items);
         purchasedList = items;
     }
 
+    /**
+     * Retrieves the Purchased object at the given position in the adapter's list.
+     * @param position position of the desired Purchased object in the list.
+     * @return Purchased object at the given position in the list.
+     */
     @Override
     public Purchased getItem(int position) {
         return purchasedList.get(position);
     }
 
+    /**
+     * Retrieves the ID of the item at the given position in the adapter's list.
+     * @param position Position of Id in the list
+     * @return Id of item at the position
+     */
     @Override
     public long getItemId(int position) {
         return position;
     }
+
+    /**
+     * Returns the View for a specific item in the ListView.
+     * @param position position of the item within the adapter's data set.
+     * @param convertView old view to reuse, if possible.
+     * @param parent parent that this view will eventually be attached to.
+     * @return View corresponding to the specified position.
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Purchased purchased = getItem(position);
@@ -106,6 +131,11 @@ public class PurchasedAdapter extends ArrayAdapter<Purchased> implements ListAda
         });
 
         editButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * OnClickListener for the edit button on the purchased list.
+             * Opens the GroupActivity for the list of items in the group on the purchased list.
+             * @param v
+             */
             @Override
             public void onClick(View v) {
                 Bundle extra = new Bundle();

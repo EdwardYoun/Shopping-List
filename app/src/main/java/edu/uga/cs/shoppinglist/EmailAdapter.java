@@ -33,15 +33,28 @@ public class EmailAdapter extends BaseAdapter {
     private ArrayList<Purchased> purchasedList;
     private DatabaseReference userReference, purchasedReference;
 
+    /**
+     * Adapter for the email used to purchase items.
+     * @param context Context of app.
+     * @param userList List of users
+     * @param purchasedList List of purchased items
+     */
     public EmailAdapter(Context context, ArrayList<Email> userList, ArrayList<Purchased> purchasedList) {
         this.context = context;
         this.userList = userList;
         this.purchasedList = purchasedList;
     }
 
+    /**
+     * @return number of users
+     */
     @Override
     public int getCount() { return userList.size(); }
 
+    /**
+     * @param position position in the list
+     * @return item at the given position
+     */
     @Override
     public Object getItem(int position) {
         return userList.get(position);
@@ -52,6 +65,14 @@ public class EmailAdapter extends BaseAdapter {
         return position;
     }
 
+    /**
+     * Gets view and populates the Settle Cost List View.
+     * @param position position of the item to populate
+     * @param convertView ListView of users
+     * @param parent Parent View
+     * @return The list of users and how much each spent. Also the average amount that each roommate needs
+     * to pay based on the total spent by all roommates.
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
