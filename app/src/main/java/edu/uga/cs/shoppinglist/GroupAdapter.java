@@ -68,7 +68,7 @@ public class GroupAdapter extends BaseAdapter {
         backButton.setVisibility(View.GONE);
 
         itemView.setText(itemList.get(position).getItemName());
-        itemCost.setText(itemList.get(position).getPriceCost());
+        itemCost.setText("$" + itemList.get(position).getPriceCost());
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

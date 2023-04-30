@@ -3,11 +3,14 @@ package edu.uga.cs.shoppinglist;
 import android.content.ClipData;
 import android.content.Context;
 import android.media.Image;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -84,6 +87,7 @@ public class ItemAdapter extends BaseAdapter {
 
                 final String newItemName = itemNameTextView.getText().toString();
                 final String newPriceCost = priceCostTextView.getText().toString();
+                itemNameTextView.addTextChangedListener(new NameTextWatcher(itemNameTextView));
                 try {
                     if (!newItemName.isEmpty() && !newPriceCost.isEmpty()) {
                         Double doub = Double.valueOf(newPriceCost);
@@ -125,6 +129,22 @@ public class ItemAdapter extends BaseAdapter {
         });
 
         return convertView;
+    }
+
+    private class NameTextWatcher implements TextWatcher {
+
+        private View view;
+        private NameTextWatcher(View view) {
+            this.view = view;
+        }
+
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+        public void afterTextChanged(Editable editable) {
+            final int position = view.getId();
+            final EditText editText = (EditText) view;
+            itemList.get(position).setItemName(editText.getText().toString());
+        }
     }
 
 }

@@ -47,7 +47,7 @@
             android:layout_weight="1"
             android:maxWidth="100dp"
             android:maxHeight="50dp"
-            android:scrollbars="vertical"
+            android:scrollbars="none"
             android:text="Items"
             android:textSize="15sp" />
 

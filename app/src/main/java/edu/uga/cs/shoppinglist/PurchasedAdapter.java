@@ -76,7 +76,6 @@ public class PurchasedAdapter extends ArrayAdapter<Purchased> implements ListAda
             }
         }
         itemsView.setText(group);
-        itemsView.setMovementMethod(new ScrollingMovementMethod());
         totalView.setText(String.format("%.2f", purchasedList.get(position).getTotal()));
         userView.setText(purchasedList.get(position).getUser());
 
