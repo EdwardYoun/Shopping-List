@@ -9,14 +9,24 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class UserActivity extends AppCompatActivity {
 
     private static final String DEBUG_TAG = "UserActivity";
     private TextView signedInTextView;
+    private DatabaseReference purchasedReference;
+    public ArrayList<Purchased> purchasedList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +38,8 @@ public class UserActivity extends AppCompatActivity {
         Button logoutButton = (Button) findViewById(R.id.button8);
         Button recentlyPurchasedButton = (Button) findViewById(R.id.button6);
         Button settleCostButton = (Button) findViewById(R.id.button7);
+        purchasedList = new ArrayList<>();
+        purchasedReference = FirebaseDatabase.getInstance().getReference("purchased");
 
         // Setup a listener for a change in the sign in status (authentication status change)
         // when it is invoked, check if a user is signed in and update the UI text view string,
@@ -50,6 +62,21 @@ public class UserActivity extends AppCompatActivity {
                     Log.d( DEBUG_TAG, "onAuthStateChanged:signed_out" );
                     signedInTextView.setText( "Signed in as: not signed in" );
                 }
+            }
+        });
+
+        purchasedReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                purchasedList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Purchased item = snapshot.getValue(Purchased.class);
+                    purchasedList.add(item);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle errors here
             }
         });
 
@@ -78,8 +105,15 @@ public class UserActivity extends AppCompatActivity {
         settleCostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(UserActivity.this, SettleActivity.class);
-                startActivity(intent);
+                if (purchasedList.size() == 0) {
+                    Toast.makeText(view.getContext(),
+                            "Nothing was purchased yet!",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Intent intent = new Intent(UserActivity.this, SettleActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }
