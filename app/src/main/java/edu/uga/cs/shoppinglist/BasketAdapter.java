@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -19,6 +21,8 @@ public class BasketAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<Item> itemList;
     private DatabaseReference databaseReference, basketReference;
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String userEmail = user.getEmail().replace(".","/");
 
     /**
      * Adapter for the Shopping Basket.
@@ -80,7 +84,7 @@ public class BasketAdapter extends BaseAdapter {
         ImageButton buyButton = convertView.findViewById(R.id.button11);
         Button removeButton = convertView.findViewById(R.id.button13);
         databaseReference = FirebaseDatabase.getInstance().getReference("items");
-        basketReference = FirebaseDatabase.getInstance().getReference("basket");
+        basketReference = FirebaseDatabase.getInstance().getReference("basket" + userEmail);
 
         itemNameTextView.setText(itemList.get(position).getItemName());
         itemNameTextView.setFocusable(false);

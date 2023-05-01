@@ -39,7 +39,8 @@ public class ListViewActivity extends AppCompatActivity {
     private BasketAdapter basketAdapter;
     private DatabaseReference databaseReference, basketReference, purchasedReference;
 
-    private FirebaseDatabase database;
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String userEmail = user.getEmail().replace(".","/");
 
     /**
      * Sets up the ListViewActivity which displays the shopping list.
@@ -77,7 +78,7 @@ public class ListViewActivity extends AppCompatActivity {
         basketView.setAdapter(basketAdapter);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("items");
-        basketReference = FirebaseDatabase.getInstance().getReference("basket");
+        basketReference = FirebaseDatabase.getInstance().getReference("basket" + userEmail);
         purchasedReference = FirebaseDatabase.getInstance().getReference("purchased");
 
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -163,7 +164,6 @@ public class ListViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(!basketList.isEmpty()) {
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     double total = 0;
                     String listId = purchasedReference.push().getKey();
                     for (int i = 0; i < basketList.size(); i++) {

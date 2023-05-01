@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +36,8 @@ public class ItemAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<Item> itemList;
     private DatabaseReference databaseReference, basketReference;
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String userEmail = user.getEmail().replace(".","/");
 
     /**
      * Constructs new ItemAdapter with context and itemList
@@ -94,7 +98,7 @@ public class ItemAdapter extends BaseAdapter {
         ImageButton deleteButton = convertView.findViewById(R.id.button10);
         ImageButton buyButton = convertView.findViewById(R.id.button11);
         databaseReference = FirebaseDatabase.getInstance().getReference("items");
-        basketReference = FirebaseDatabase.getInstance().getReference("basket");
+        basketReference = FirebaseDatabase.getInstance().getReference("basket" + userEmail);
 
         itemNameTextView.setText(itemList.get(position).getItemName());
         priceCostTextView.setText(itemList.get(position).getPriceCost());
