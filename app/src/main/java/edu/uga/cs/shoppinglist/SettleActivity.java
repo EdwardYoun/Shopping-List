@@ -87,6 +87,7 @@ public class SettleActivity extends AppCompatActivity {
             }
         });
 
+        //sends user back to user activity
         ImageButton backToUser = (ImageButton) findViewById(R.id.goBackButton4);
         backToUser.setOnClickListener(new View.OnClickListener() {
             @Override

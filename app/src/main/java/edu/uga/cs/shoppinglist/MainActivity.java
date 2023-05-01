@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener( new LoginButtonClickListener() );
     }
 
+    //can register if no account
     private class RegisterButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick( View v ) {
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //logins and gets in if account is in the database
     private class LoginButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick( View v ) {

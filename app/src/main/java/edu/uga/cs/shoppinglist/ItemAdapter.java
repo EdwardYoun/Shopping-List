@@ -109,12 +109,14 @@ public class ItemAdapter extends BaseAdapter {
         checkoutButton.setVisibility(View.GONE);
         removeButton.setVisibility(View.GONE);
 
+        //allows user to edit info
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 final String newItemName = itemNameTextView.getText().toString();
                 final String newPriceCost = priceCostTextView.getText().toString();
+                //has to have both fields filled and only numbers in price text
                 try {
                     if (!newItemName.isEmpty() && !newPriceCost.isEmpty()) {
                         Double doub = Double.valueOf(newPriceCost);
@@ -139,6 +141,7 @@ public class ItemAdapter extends BaseAdapter {
             }
         });
 
+        //deletes item from list
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,6 +149,7 @@ public class ItemAdapter extends BaseAdapter {
             }
         });
 
+        //puts item in basket
         buyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

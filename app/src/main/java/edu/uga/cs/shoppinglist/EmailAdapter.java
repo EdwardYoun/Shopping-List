@@ -85,17 +85,20 @@ public class EmailAdapter extends BaseAdapter {
         userReference = FirebaseDatabase.getInstance().getReference("users");
         purchasedReference = FirebaseDatabase.getInstance().getReference("purchased");
 
+        //average total
         double total = 0;
 
         settleView.setVisibility(View.GONE);
         goBackButton.setVisibility(View.GONE);
 
+        //checks how much user spent in all purchased
         for (int i = 0; i < purchasedList.size(); i++) {
             if (userList.get(position).getEmail().equals(purchasedList.get(i).getUser())) {
                 total = total + purchasedList.get(i).getTotal();
             }
         }
 
+        //displays email with total they spent and the average cost for the last user just so that it appears at the bottom
         if (position == userList.size()-1){
             double average = 0;
             for (int i = 0; i < purchasedList.size(); i++) {

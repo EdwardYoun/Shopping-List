@@ -77,6 +77,7 @@ public class GroupActivity extends AppCompatActivity {
             }
         });
 
+        //goes back to purchased list
         ImageButton backToUser = (ImageButton) findViewById(R.id.goBackButton3);
         backToUser.setOnClickListener(new View.OnClickListener() {
             /**

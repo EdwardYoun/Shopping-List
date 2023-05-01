@@ -85,6 +85,7 @@ public class UserActivity extends AppCompatActivity {
             }
         });
 
+        //sends user to list view activity
         shoppingListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,6 +93,7 @@ public class UserActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        //sends user over to purchased activity
         recentlyPurchasedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,6 +101,7 @@ public class UserActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        //sends user to main activity again and cannot access the other buttons in user activity
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,6 +110,7 @@ public class UserActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        //sends user over to settle activity
         settleCostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

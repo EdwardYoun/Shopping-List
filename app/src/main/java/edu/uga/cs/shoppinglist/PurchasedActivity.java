@@ -78,6 +78,7 @@ public class PurchasedActivity extends AppCompatActivity {
         });
 
         ImageButton backToUser = (ImageButton) findViewById(R.id.goBackButton2);
+        //sends user back to user activity
         backToUser.setOnClickListener(new View.OnClickListener() {
             /**
              * OnClickListener to return to home page, UserActivity.

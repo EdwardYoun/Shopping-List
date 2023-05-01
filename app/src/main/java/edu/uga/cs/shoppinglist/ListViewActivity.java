@@ -81,11 +81,13 @@ public class ListViewActivity extends AppCompatActivity {
         basketReference = FirebaseDatabase.getInstance().getReference("basket" + userEmail);
         purchasedReference = FirebaseDatabase.getInstance().getReference("purchased");
 
+        //adds item to shopping list
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final String itemName = itemNameEditText.getText().toString();
                 final String priceCost = priceCostEditText.getText().toString();
+                //makes sure price is actually a number
                 try {
                     if (!itemName.isEmpty() && !priceCost.isEmpty()) {
                         Double doub = Double.valueOf(priceCost);
@@ -143,10 +145,13 @@ public class ListViewActivity extends AppCompatActivity {
                 // Handle errors here
             }
         });
+
+        //sends user back to user activity
         ImageButton backToUser = (ImageButton) findViewById(R.id.goBackButton1);
         backToUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //removes anything from basket if leaving
                 if (!basketList.isEmpty()) {
                     for (int i = 0; i < basketList.size(); i++) {
                         Item item = new Item(basketList.get(i).getId(), basketList.get(i).getItemName(), basketList.get(i).getPriceCost());
@@ -160,6 +165,7 @@ public class ListViewActivity extends AppCompatActivity {
         });
 
         Button checkoutButton = findViewById(R.id.button12);
+        //checksout items in basket which deletes the items in basket and groups them as one purchase for purchased list
         checkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

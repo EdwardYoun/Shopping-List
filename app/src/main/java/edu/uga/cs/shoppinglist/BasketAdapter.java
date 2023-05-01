@@ -86,6 +86,7 @@ public class BasketAdapter extends BaseAdapter {
         databaseReference = FirebaseDatabase.getInstance().getReference("items");
         basketReference = FirebaseDatabase.getInstance().getReference("basket" + userEmail);
 
+        //prevent items from being editable
         itemNameTextView.setText(itemList.get(position).getItemName());
         itemNameTextView.setFocusable(false);
         priceCostTextView.setText(itemList.get(position).getPriceCost());
@@ -99,6 +100,7 @@ public class BasketAdapter extends BaseAdapter {
         deleteButton.setVisibility(View.GONE);
         buyButton.setVisibility(View.GONE);
 
+        //removes item from basket and puts it back into the list
         removeButton.setOnClickListener(new View.OnClickListener() {
             /**
              * This method gets the view of the item in the Shopping Basket.

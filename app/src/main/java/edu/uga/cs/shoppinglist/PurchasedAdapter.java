@@ -92,6 +92,7 @@ public class PurchasedAdapter extends ArrayAdapter<Purchased> implements ListAda
         recentView.setVisibility(View.GONE);
         backButton.setVisibility(View.GONE);
 
+        //groups all the items as one purchased string
         for (int i = 0; i < purchasedList.get(position).getItemList().size(); i++) {
             if (i == 0) {
                 group = purchasedList.get(position).getItemList().get(i).getItemName();
@@ -104,11 +105,13 @@ public class PurchasedAdapter extends ArrayAdapter<Purchased> implements ListAda
         totalView.setText(String.format("%.2f", purchasedList.get(position).getTotal()));
         userView.setText(purchasedList.get(position).getUser());
 
+        //edit price of purchased
         priceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String newTotal = totalView.getText().toString();
 
+                //checks if price is a number
                 try {
                     if (!newTotal.isEmpty()) {
                         Double doub = Double.valueOf(newTotal);
@@ -130,6 +133,7 @@ public class PurchasedAdapter extends ArrayAdapter<Purchased> implements ListAda
             }
         });
 
+        //shows list of items in GroupActivity
         editButton.setOnClickListener(new View.OnClickListener() {
             /**
              * OnClickListener for the edit button on the purchased list.
