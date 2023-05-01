@@ -35,24 +35,48 @@ public class ItemAdapter extends BaseAdapter {
     private ArrayList<Item> itemList;
     private DatabaseReference databaseReference, basketReference;
 
+    /**
+     * Constructs new ItemAdapter with context and itemList
+     * @param context context for adapter
+     * @param itemList list to be used
+     */
     public ItemAdapter(Context context, ArrayList<Item> itemList) {
         this.context = context;
         this.itemList = itemList;
     }
 
+    /**
+     * @return number of items in the list
+     */
     @Override
     public int getCount() { return itemList.size(); }
 
+    /**
+     * @param position position in the list
+     * @return item object at the specified position
+     */
     @Override
     public Object getItem(int position) {
         return itemList.get(position);
     }
 
+    /**
+     * @param position position in the list
+     * @return Id of the item at the specified position
+     */
     @Override
     public long getItemId(int position) {
         return position;
     }
 
+    /**
+     * Sets up each item in the ShoppingList
+     * Adds an edit, delete, and buy buttons for their respective functions on the ShoppingList.
+     * @param position position of the item
+     * @param convertView View of the item
+     * @param parent parent Shopping List
+     * @return the View for the item
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {

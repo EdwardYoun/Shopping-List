@@ -37,21 +37,41 @@ public class GroupAdapter extends BaseAdapter {
 
     }
 
+    /**
+     * @return The number of items in a group on the PurchasedList
+     */
     @Override
     public int getCount() {
         return itemList.size();
     }
 
+    /**
+     * @param position position on the List
+     * @return the item on the given position
+     */
     @Override
     public Object getItem(int position) {
         return itemList.get(position);
     }
 
+    /**
+     * @param position
+     * @return the Id at the provided position
+     */
     @Override
     public long getItemId(int position) {
         return position;
     }
 
+    /**
+     * Adapter for the groups of items on the purchased list.
+     * Adds the item names and prices of the items to the listView.
+     * Adds remove button to remove items from the group.
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return the view with the updated lists and data.
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {

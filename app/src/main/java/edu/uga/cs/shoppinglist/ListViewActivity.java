@@ -112,7 +112,6 @@ public class ListViewActivity extends AppCompatActivity {
             }
         });
 
-
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -128,7 +127,6 @@ public class ListViewActivity extends AppCompatActivity {
                 // Handle errors here
             }
         });
-
         basketReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -144,7 +142,6 @@ public class ListViewActivity extends AppCompatActivity {
                 // Handle errors here
             }
         });
-
         ImageButton backToUser = (ImageButton) findViewById(R.id.goBackButton1);
         backToUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,6 +157,7 @@ public class ListViewActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         Button checkoutButton = findViewById(R.id.button12);
         checkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
