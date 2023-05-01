@@ -114,6 +114,7 @@ public class UserActivity extends AppCompatActivity {
         settleCostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //cannot access if nothing has been purchased
                 if (purchasedList.size() == 0) {
                     Toast.makeText(view.getContext(),
                             "Nothing was purchased yet!",
