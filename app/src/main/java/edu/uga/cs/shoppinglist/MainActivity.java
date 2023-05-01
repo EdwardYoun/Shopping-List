@@ -23,6 +23,11 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String DEBUG_TAG = "MainActivity";
 
+    /**
+     * Sets up the MainActivity screen.
+     * Displays info and login/register buttons.
+     * @param savedInstanceState Saved instance state bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

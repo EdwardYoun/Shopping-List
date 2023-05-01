@@ -28,6 +28,11 @@ public class UserActivity extends AppCompatActivity {
     private DatabaseReference purchasedReference;
     public ArrayList<Purchased> purchasedList;
 
+    /**
+     * Sets up the UserActivity screen. This is the home page when a user is logged in.
+     * Displays the current user and Shopping List, Recently Purchased, Settle the Cost, and Logout buttons.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

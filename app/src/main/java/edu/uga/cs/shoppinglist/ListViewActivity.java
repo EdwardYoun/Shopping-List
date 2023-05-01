@@ -41,7 +41,12 @@ public class ListViewActivity extends AppCompatActivity {
 
     private FirebaseDatabase database;
 
-
+    /**
+     * Sets up the ListViewActivity which displays the shopping list.
+     * Allows the user to add items and their price to the list.
+     * They can then add the items to their basket and checkout.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -184,6 +189,10 @@ public class ListViewActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * When the user presses the back button to return to the homepage,
+     * The items currently in their basket are added back to the shopping list.
+     */
     @Override
     public void onBackPressed() {
         if (!basketList.isEmpty()) {

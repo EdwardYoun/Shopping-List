@@ -30,6 +30,11 @@ public class SettleActivity extends AppCompatActivity {
     private ArrayList<Purchased> purchasedList;
     private EmailAdapter emailAdapter;
 
+    /**
+     * Sets up the SettleActivity where the cost of the purchased items is divided among the users.
+     * Listens for the data changes across the app and then clears the purchased list after settling.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
